@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<hr/>
+<button onclick="getData()">Oppdater</button>
+<hr/>
+<input type="text" oninput="newText=this.value"/>
+<button onclick="addText()">Legg til tekst</button>
+<pre id="info"></pre>
+<script>
+    let newText;
+    const app = document.getElementById('app');
+    const info = document.getElementById('info');
+
+    async function addText() {   
+        const data = {
+            text: newText
+        }
+        const response = await axios.post('/texts', data);
+        info.innerText = response.data;        
+    }
+
+    async function getData() {
+        const response = await axios.get('/texts');
+        const texts = response.data;
+        console.log(texts);
+        let html = '';
+        for (let text of texts) {
+            html += `<li>${text}</li>`;
+        }
+        app.innerHTML = `<ol>${html}</ol>`;
+    }
+
+</script>
+</body>
+</html>
