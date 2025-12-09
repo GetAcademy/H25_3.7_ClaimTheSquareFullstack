@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<pre id="app"></pre>
+<script>
+    const app = document.getElementById('app');
+
+    getData();
+
+    async function getData() {
+        const response = await axios.get('/texts');
+        app.innerText = response.data;
+    }
+
+</script>
+</body>
+</html>
